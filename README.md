@@ -14,7 +14,7 @@ Create a folder "videos" in the folder "src" and paste your video file named "vi
 npm run ffmpeg
 ```
 
-Wait till it logs "Ended" in the console.
+Wait till it logs ".m3u8 and .ts generation completed." in the console. This may take some time depending on the quality of your video.
 
 ```
 npm run app
