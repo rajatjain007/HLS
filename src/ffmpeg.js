@@ -8,10 +8,10 @@ ffmpeg("videos/video.mp4", { timeout: 432000 })
   .addOptions([
     "-profile:v baseline",
     "-level 3.0",
-    "-start_number 0",
-    "-hls_time 10",
+    "-start_number 0", // the first .ts file received will be at index 0
+    "-hls_time 10", // each .ts file is a chunk of 10s of the video
     "-hls_list_size 0",
-    "-f hls",
+    "-f hls", // protocol: HLS
   ])
   .output("videos/output.m3u8")
   .on("end", () => {
