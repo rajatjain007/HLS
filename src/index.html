@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adaptive Streaming using HLS</title>
+    <style>
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        font-family: "Courier New", Courier, monospace;
+        color: #444;
+        padding: 0 10px;
+      }
+      h2 {
+        line-height: 1.2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Adaptive Streaming using HLS</h2>
+    <p>This video is being streamed instead of downloaded.</p>
+    <video id="videoPlayer" width="650" controls muted="muted" autoplay></video>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      const video = document.getElementById("videoPlayer");
+      const videoSrc = "/videos/output.m3u8";
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFESTED_PARSED, () => {
+          video.play();
+        });
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = videoSrc;
+        video.addEventListener("loadedmetadata", () => {
+          video.play();
+        });
+      }
+    </script>
+    <i>Big Buck Bunny</i>
+  </body>
+</html>
